@@ -1,0 +1,1 @@
+const playerMoney = Number.parseInt(localStorage.getItem('playerMoney'),10);
