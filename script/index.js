@@ -9,7 +9,3 @@ buttons.forEach(button => {
     })
 })
 
-// function redirect(){
-    
-// }
-

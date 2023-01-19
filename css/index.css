@@ -1,0 +1,36 @@
+body{
+    background-image: url(../images/bg-image.jpg);
+}
+h1{
+    color:rgb(0, 0, 0)!important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-size: 100px !important;
+    -webkit-text-fill-color: rgb(255, 215, 0) !important;
+    -webkit-text-stroke: 2px !important;
+    font-weight: bold;
+}
+h3{
+    color:rgb(0, 0, 0) !important;
+    font-size: 35px !important;
+    -webkit-text-fill-color: rgb(255, 215, 0) !important;
+    -webkit-text-stroke: 1px !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-weight: bold !important;
+}
+
+.text-container{
+    margin-top:100px;
+}
+
+.bet-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+    margin-top:50px;
+}
+
+.btn{
+    font-weight: bolder !important;
+    color:rgb(229, 245, 227) !important;
+}
