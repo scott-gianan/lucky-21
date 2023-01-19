@@ -175,12 +175,12 @@ function draw(){
 }
 
 function showPlayerMoney(){
-    playerMoneyText.innerText = `Your Money: ${playerMoney}`
+    playerMoneyText.innerText = `Money: ${playerMoney}`;
 }
 showPlayerMoney();
 
 function showDealerValue(){
-    dealerHandValueText.innerText = `Dealer's Hand: ${dealerHandValue}`;
+    dealerHandValueText.innerText = `Hand: ${dealerHandValue}`;
 }
 
 function showFirstCard(){

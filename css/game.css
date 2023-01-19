@@ -1,4 +1,27 @@
 
-.cover-card{
-    position: absolute;
+
+#bet-container, #player-hand{
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    margin-bottom: 1em;
+}
+
+
+
+#dealer-hand{
+    display:flex;
+    justify-content: center;
+
+}
+
+#play-button{
+    display: flex;
+    justify-content: center;
+    gap:10%;
+}
+
+body{
+    background-image: URL(../images/game-bg.jpg);
+    background-size:cover;
 }
