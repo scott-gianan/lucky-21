@@ -27,8 +27,8 @@ const playerHandValueText = document.querySelector('#player-hand-value');
 const dealerHandValueText = document.querySelector('#dealer-hand-value');
 const playerMoneyText = document.querySelector('#player-money');
 //hands
-const dealerHand = document.querySelector('#dealer-hand');
-const playerHand = document.querySelector('#player-hand');
+let dealerHand = document.querySelector('#dealer-hand');
+let playerHand = document.querySelector('#player-hand');
 //buttons
 const hitBtn = document.querySelector('#hit-button');
 const standBtn = document.querySelector('#stand-button');
@@ -36,10 +36,10 @@ const playAgainBtn = document.querySelector('#play-again');
 //cover card
 const coverCard = document.querySelector('.cover-card');
 
+//start card generation
 function randomCardValue(){
     return Math.floor(Math.random()*10)+1;
 }
-
 function randomCard(){
     let randomCardArray = cards[randomCardValue()];
     return randomCardArray[Math.round(Math.random()*(randomCardArray.length-1))]
@@ -56,14 +56,14 @@ function generateCard(){
         } else {
             cardImg.alt = card[0];
         }
+        cardImg.className = 'player-card hide';
         cardImg.width = '100';
-        cardImg.className = 'player-card';
         return cardImg;
     } else {
         return generateCard();
     }
 }
-
+//end card generation 
 function firstDealtCards(){
     //player hand
     for(let i=1; i<=2; i++){
@@ -76,7 +76,7 @@ function firstDealtCards(){
         if(i===1){
             firstDealerDealtCards.className = 'dealer-card hidden';
         } else {
-            firstDealerDealtCards.className = 'dealer-card';
+            firstDealerDealtCards.className = 'dealer-card hide';
         }
         dealerHandCards.push(firstDealerDealtCards.src);
     }
@@ -102,6 +102,7 @@ function countDealerValue(){
 function hit(){
     let hittedCard = playerHand.appendChild(generateCard());
     playerHandValue += Number.parseInt(hittedCard.alt,10);
+    hittedCard.classList = `player-card`;
     playerHandCards.push(hittedCard.src);
     showPlayerHandValue();
     gameOver();
@@ -110,7 +111,7 @@ function hit(){
 function showPlayerHandValue(){
     playerHandValueText.innerText = `Your Hand: ${playerHandValue}`
 }
-showPlayerHandValue();
+
 
 function gameOver(){
     if (playerHandValue>21){
@@ -134,6 +135,8 @@ function playAgain(){
 
 bets.forEach(bet => {
     bet.addEventListener('click', ()=> {
+        showPlayerHandValue();
+        showCards();
         playerMoney = Number.parseInt(localStorage.getItem('playerMoney'),10);
         playAgainBtn.disabled = true;
         localStorage.setItem('playerBet',bet.innerText);
@@ -196,8 +199,9 @@ function stand(){
     countDealerValue();
     if(dealerHandValue<16){
         let dealtCard = dealerHand.appendChild(generateCard());
+        dealtCard.classList = `dealer-card`;
         dealerHandValue += Number.parseInt(dealtCard.alt,10);
-        console.log(dealerHandValue);
+        // console.log(dealtCard);
     }
     showDealerValue();
     showFirstCard();
@@ -224,4 +228,14 @@ function checkAce(){
     })
 }
 checkAce();
+
+function showCards(){
+    playerCards.forEach(playerCard => {
+        playerCard.classList.remove('hide');
+    })
+    dealerCards.forEach(dealerCard => {
+        dealerCard.classList.remove('hide');
+    })
+    coverCard.classList.remove('hide');
+}
 // dealerHandCards[0].slice(dealerHandCards[0].length-7,dealerHandCards[0].length-6);

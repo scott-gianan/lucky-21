@@ -34,3 +34,7 @@ body{
 .text-top, #dealer-hand-value, #player-hand-value, #player-money{
     color: white;
 }
+
+.hide{
+    opacity:0;
+}
