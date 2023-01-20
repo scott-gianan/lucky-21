@@ -1,27 +1,36 @@
-
-
-#bet-container, #player-hand{
+.bet-container, .play-container{
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 2%;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 }
 
-
-
-#dealer-hand{
-    display:flex;
-    justify-content: center;
-
-}
-
-#play-button{
+#player-hand{
     display: flex;
     justify-content: center;
-    gap:10%;
+    flex-wrap: wrap;
 }
 
 body{
     background-image: URL(../images/game-bg.jpg);
-    background-size:cover;
+    background-size: cover;
+}
+
+.hidden{
+    opacity: 0;
+}
+
+#dealer-hand{
+    display: flex;
+    justify-content: center;
+}
+
+.cover-card{
+    position:absolute;
+    right:50%;
+}
+
+.text-top, #dealer-hand-value, #player-hand-value, #player-money{
+    color: white;
 }

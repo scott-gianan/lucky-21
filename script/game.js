@@ -72,15 +72,19 @@ function firstDealtCards(){
     }
     //dealer hand
     for(let i=1; i<=2; i++){
-        let firstDealerDealthCards = dealerHand.appendChild(generateCard());
-        firstDealerDealthCards.className = 'dealer-card';
-        dealerHandCards.push(firstDealerDealthCards.src);
+        let firstDealerDealtCards = dealerHand.appendChild(generateCard());
+        if(i===1){
+            firstDealerDealtCards.className = 'dealer-card hidden';
+        } else {
+            firstDealerDealtCards.className = 'dealer-card';
+        }
+        dealerHandCards.push(firstDealerDealtCards.src);
     }
 }
 firstDealtCards();
 
-const playerCards = document.querySelectorAll('.player-card');
-const dealerCards = document.querySelectorAll('.dealer-card');
+let playerCards = document.querySelectorAll('.player-card');
+let dealerCards = document.querySelectorAll('.dealer-card');
 
 function countPlayerValue(){
     playerCards.forEach(playerCard => {
@@ -94,7 +98,6 @@ function countDealerValue(){
         dealerHandValue += Number.parseInt(dealerCard.alt,10);
     })
 }
-countDealerValue();
 
 function hit(){
     let hittedCard = playerHand.appendChild(generateCard());
@@ -111,10 +114,12 @@ showPlayerHandValue();
 
 function gameOver(){
     if (playerHandValue>21){
+        countDealerValue();
         showFirstCard();
         playerLost();
         showDealerValue();
     } else if (playerHandValue === 21){
+        countDealerValue();
         showFirstCard();
         playerBlackJack();
         showDealerValue();
@@ -150,6 +155,7 @@ function disableHitStandEnablePlay(){
 }
 
 function playerBlackJack(){
+    document.querySelector('.text-top').innerText = `BLACK JACK!`;
     disableHitStandEnablePlay();
     localStorage.setItem('playerMoney',playerMoney+(1.5*playerBet));
     playerMoney = Number.parseInt(localStorage.getItem('playerMoney'),10);
@@ -157,6 +163,7 @@ function playerBlackJack(){
 }
 
 function playerLost(){
+    document.querySelector('.text-top').innerText = `YOU LOSE!`;
     disableHitStandEnablePlay();
     localStorage.setItem('playerMoney',playerMoney-(2*playerBet));
     playerMoney = Number.parseInt(localStorage.getItem('playerMoney'),10);
@@ -164,45 +171,57 @@ function playerLost(){
 }
 
 function playerWon(){
+    document.querySelector('.text-top').innerText = `YOU WIN!`;
     disableHitStandEnablePlay();
     localStorage.setItem('playerMoney',playerMoney+(2*playerBet));
     playerMoney = Number.parseInt(localStorage.getItem('playerMoney'),10);
     showPlayerMoney();
 }
 
-function draw(){
-    disableHitStandEnablePlay();
-}
-
 function showPlayerMoney(){
-    playerMoneyText.innerText = `Money: ${playerMoney}`;
+    playerMoneyText.innerText = `Money: ${playerMoney}`
 }
 showPlayerMoney();
 
 function showDealerValue(){
-    dealerHandValueText.innerText = `Hand: ${dealerHandValue}`;
+    dealerHandValueText.innerText = `Dealer's Hand: ${dealerHandValue}`;
 }
 
 function showFirstCard(){
     dealerHand.removeChild(coverCard);
+    document.querySelector('.hidden').classList.remove('hidden');
 }
 
 function stand(){
+    countDealerValue();
+    if(dealerHandValue<16){
+        let dealtCard = dealerHand.appendChild(generateCard());
+        dealerHandValue += Number.parseInt(dealtCard.alt,10);
+        console.log(dealerHandValue);
+    }
     showDealerValue();
     showFirstCard();
-    if(playerHandValue>dealerHandValue){
+    if(playerHandValue>dealerHandValue|| dealerHandValue>21){
+        document.querySelector('.text-top').innerText = `YOU WIN!`;
         playerWon();
     } else if (dealerHandValue>playerHandValue){
+        document.querySelector('.text-top').innerText = `YOU LOSE!`;
         playerLost();
     } else if (dealerHandValue===playerHandValue){
-        draw();
+        document.querySelector('.text-top').innerText = `DRAW!`;
+        disableHitStandEnablePlay();
     }
 }
 
-// this function will loop through the cards to see if they have an 'Ace'
+// console.log(`player:`, playerHandCards);
+// console.log(`dealer:`, dealerHandCards);
 
-
-
-//function invokation:
-
-
+function checkAce(){
+    dealerHandCards.forEach(dealerHandCard => {
+        let firstDealerCard = dealerHandCards[0].slice(dealerHandCards[0].length-7,dealerHandCards[0].length-6);
+        let secondDealerCard = dealerHandCards[1].slice(dealerHandCards[1].length-7,dealerHandCards[1].length-6);
+        console.log(firstDealerCard,secondDealerCard);
+    })
+}
+checkAce();
+// dealerHandCards[0].slice(dealerHandCards[0].length-7,dealerHandCards[0].length-6);

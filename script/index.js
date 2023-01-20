@@ -8,4 +8,3 @@ buttons.forEach(button => {
         window.location.href = window.location.href+'game.html';
     })
 })
-
