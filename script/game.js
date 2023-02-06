@@ -220,14 +220,14 @@ function stand(){
 // console.log(`player:`, playerHandCards);
 // console.log(`dealer:`, dealerHandCards);
 
-function checkAce(){
-    dealerHandCards.forEach(dealerHandCard => {
-        let firstDealerCard = dealerHandCards[0].slice(dealerHandCards[0].length-7,dealerHandCards[0].length-6);
-        let secondDealerCard = dealerHandCards[1].slice(dealerHandCards[1].length-7,dealerHandCards[1].length-6);
-        console.log(firstDealerCard,secondDealerCard);
-    })
-}
-checkAce();
+// function checkAce(){
+//     dealerHandCards.forEach(dealerHandCard => {
+//         let firstDealerCard = dealerHandCards[0].slice(dealerHandCards[0].length-7,dealerHandCards[0].length-6);
+//         let secondDealerCard = dealerHandCards[1].slice(dealerHandCards[1].length-7,dealerHandCards[1].length-6);
+//         console.log(firstDealerCard,secondDealerCard);
+//     })
+// }
+// checkAce();
 
 function showCards(){
     playerCards.forEach(playerCard => {

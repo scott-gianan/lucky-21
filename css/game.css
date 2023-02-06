@@ -38,3 +38,6 @@ body{
 .hide{
     opacity:0;
 }
+p {
+    color: white;
+}
